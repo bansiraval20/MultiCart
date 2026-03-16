@@ -1,6 +1,9 @@
 import { auth } from '@/auth'
+import AdminDashBoard from '@/components/Admin/AdminDashBoard'
 import EditRoleandPhone from '@/components/EditRoleandPhone'
 import Navbar from '@/components/Navbar'
+import UserDashBoard from '@/components/User/UserDashBoard'
+import VendorDashBoard from '@/components/Vendor/VendorDashBoard'
 import connectDb from '@/lib/connectDB'
 import User from '@/model/user.model'
 import { redirect } from 'next/navigation'
@@ -20,8 +23,11 @@ export default async function Home() {
 
   const plainUser = JSON.parse(JSON.stringify(user))
   return (
-    <div className='min-h-screen flex items-center justify-center bg-linear-to-br from-gray-900 via-black to-gray-900 text-white px-6 font-sans'>
+    <div className='min-h-screen bg-linear-to-br from-gray-900 via-black to-gray-900 text-white font-sans'>
       <Navbar user={plainUser}/>
+      {
+        user?.role === 'user' ? <UserDashBoard /> : user?.role === 'vendor' ? <VendorDashBoard /> : <AdminDashBoard />
+      }
     </div>
   )
 }

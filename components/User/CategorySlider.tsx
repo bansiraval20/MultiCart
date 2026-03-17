@@ -1,23 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { GiLargeDress, GiLipstick } from 'react-icons/gi'
-import {
-    FaAngleLeft,
-  FaAngleRight,
-  FaCar,
-  FaGift,
-  FaMobileScreenButton,
-  FaVolleyball,
-} from 'react-icons/fa6'
-import { IoBookSharp, IoHome } from 'react-icons/io5'
-import { TbHorseToy } from 'react-icons/tb'
-import { TiShoppingCart } from 'react-icons/ti'
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const CategorySlider = () => {
   const [startIndex, setStartIndex] = useState(0)
   const categories = [
-    { label: 'Fashion & Lifestyle', icon: '👗'  },
+    { label: 'Fashion & Lifestyle', icon: '👗' },
     {
       label: 'Electronics & Gadgets',
       icon: '📱',
@@ -37,13 +26,13 @@ const CategorySlider = () => {
   }
 
   const PrevSlice = () => {
-    setStartIndex((prev) => prev - 5 < 0 ? categories.length - 5 : prev - 5)
+    setStartIndex((prev) => (prev - 5 < 0 ? categories.length - 5 : prev - 5))
   }
 
   useEffect(() => {
     const interval = setInterval(NextSlice, 5000)
     return () => clearInterval(interval)
-  },[])
+  }, [])
 
   return (
     <motion.div
@@ -75,11 +64,15 @@ const CategorySlider = () => {
             ))}
           </motion.div>
         </AnimatePresence>
-        <button onClick={PrevSlice} className='absolute border border-gray-500 left-0 top-1/2 -translate-y-1/2 bg-gray-800/60 text-white p-2 rounded-full'>
-            <FaAngleLeft />
+        <button
+          onClick={PrevSlice}
+          className='absolute border border-gray-500 left-0 top-1/2 -translate-y-1/2 bg-gray-800/60 text-white p-2 rounded-full'>
+          <FaAngleLeft />
         </button>
-        <button onClick={NextSlice} className='absolute border border-gray-500 right-0 top-1/2 -translate-y-1/2 bg-gray-800/60 text-white p-2 rounded-full'>
-            <FaAngleRight />
+        <button
+          onClick={NextSlice}
+          className='absolute border border-gray-500 right-0 top-1/2 -translate-y-1/2 bg-gray-800/60 text-white p-2 rounded-full'>
+          <FaAngleRight />
         </button>
       </div>
     </motion.div>

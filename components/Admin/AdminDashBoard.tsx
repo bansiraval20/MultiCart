@@ -5,10 +5,26 @@ import { FaStore } from 'react-icons/fa6'
 import { MdDashboard } from 'react-icons/md'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import AdminDashboard from './Dashboard'
+import UserOrders from './UserOrders'
+import VendorApproval from './VendorApproval'
+import ProductApproval from './ProductApproval'
+import VendorDetails from './VendorDetails'
 
 const AdminDashBoard = () => {
   const [activePage, setActivePage] = useState('dashboard')
   const [openMenu, setOpenMenu] = useState(false)
+
+  const renderPage = () => {
+    switch (activePage) {
+      case "dashboard": return <AdminDashboard />;
+      case "vendors": return <VendorDetails />;
+      case "orders": return <UserOrders />;
+      case "vendor-approval": return <VendorApproval />;
+      case "product-approval": return <ProductApproval />;
+      default: return <AdminDashboard />;
+    }
+  }
 
   const menu = [
     { id: 'dashboard', label: 'Dashboard', icon: <MdDashboard size={22} /> },
@@ -85,6 +101,15 @@ const AdminDashBoard = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Main Area  */}
+      <motion.div 
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4 }} 
+      className='flex-1 p-10 mt-16 lg:mt-0'>
+        {renderPage()}
+      </motion.div>
     </div>
   )
 }
